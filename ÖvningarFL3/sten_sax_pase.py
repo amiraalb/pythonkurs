@@ -1,4 +1,5 @@
 """
+
 Lägg även till så att man kan spela igen och antalet vinster / förluster hålls reda på.
 
 Experimentera med att dela upp koden i moduler.
@@ -27,6 +28,8 @@ def sten_sax_pase():
         print("Du vann!")
     elif val == "Påse" and computer_choice == "Sax":
         print("Datorn vann!")
+    else:
+        print("Ogiltigt val.")
 
 
 
