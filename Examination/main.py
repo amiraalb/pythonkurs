@@ -2,23 +2,28 @@ import random
 
 class Game():
     def __init__(self):
-            self.target_score = 21
+        self.target_score = 21
+
 class Player:
     def __init__(self):
-            self.score = 0
-            self.fails = 0
-            self.wins = 0
-            self.draw = 0
+        self.score = 0
+        self.fails = 0
+        self.wins = 0
+        self.draw = 0
 
     def reset_score(self):
         self.score = 0
+
 class Dealer(Player):
-   pass
+    pass
+
 class Dice():
     def __init__(self, sides=6):
         self.sides = sides
+
     def roll(self):
         return random.randint(1, self.sides)
+
 class Highscore():
     def __init__(self):
         self.highscore = 0
@@ -26,6 +31,12 @@ class Highscore():
     def show_highscore(self):
         print(f"Highscore: {self.highscore}")
 
+def save_results(player):
+    with open('resultat.txt', 'w') as file:
+        file.write(f"Vinster: {player.wins}\n")
+        file.write(f"Förluster: {player.fails}\n")
+        file.write(f"Oavgjorda: {player.draw}\n")
+    print("Resultat har sparats i resultat.txt")
 
 def start_game():
     game = Game()
@@ -33,30 +44,30 @@ def start_game():
     dealer = Dealer()
     dice = Dice()
 
-    print("Välkommen till spelet Blackjack med tärningar! \nDu spelar mot dealern och den som kommer närmast 21 utan att gå över vinner!")
+    print("Välkommen till spelet Blackjack med tärningar! \nDu spelar mot dealern. Målet är att komma så nära 21 poäng som möjligt utan att gå över.")
 
     while True:
         player.reset_score()
         dealer.reset_score()
 
         while True:
-            print(f"\nDin poäng: {player.score}")
+            print(f"\nNuvarande total poäng: {player.score}")
             try:
-                choice = int(input("Gör ett val: \n1. Rulla tärningen \n2. Stanna \n"))
+                choice = int(input("1. Rulla tärningen (värde 1-6) \n2. Stanna \n"))
                 if choice == 1:
                     roll = dice.roll()
-                    print(f"Du rullade: {roll}")
+                    print(f"Tärningen visar: {roll}")
                     player.score += roll
                     if player.score > game.target_score:
                         print("Du gick över 21! Du förlorade.")
                         player.fails += 1
                         break
                 elif choice == 2:
-                    print("\nDealern börjar rulla...")
+                    print("\nDealerns tur att rulla.")
                     while dealer.score < 17:
                         roll = dice.roll()
                         dealer.score += roll
-                        print(f"Dealern rullade: {roll} (Total: {dealer.score})")
+                        print(f"Tärningen visar: {roll} (Total: {dealer.score})")
 
                     if dealer.score > game.target_score:
                         print("Dealern gick över 21! Du vinner!")
@@ -76,9 +87,13 @@ def start_game():
             except ValueError:
                 print("Du måste skriva ett heltal!")
 
-        print(f"\nStatistik: Vinster: {player.wins}, Förluster: {player.fails}, Oavgjort: {player.draw}")
+        print(f"\nDina vinster: {player.wins}, Dealerns vinster: {player.fails}, Oavgjort: {player.draw}")
 
         again = input("\nVill du spela en gång till? (ja/nej): ").lower()
         if again != 'ja':
             print("Tack för att du spelade!")
+            save_results(player)
             break
+
+
+start_game()
