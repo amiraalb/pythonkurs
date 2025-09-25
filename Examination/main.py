@@ -1,4 +1,31 @@
-import classes
+import random
+
+class Game():
+    def __init__(self):
+            self.target_score = 21
+class Player:
+    def __init__(self):
+            self.score = 0
+            self.fails = 0
+            self.wins = 0
+            self.draw = 0
+
+    def reset_score(self):
+        self.score = 0
+class Dealer(Player):
+   pass
+class Dice():
+    def __init__(self, sides=6):
+        self.sides = sides
+    def roll(self):
+        return random.randint(1, self.sides)
+class Highscore():
+    def __init__(self):
+        self.highscore = 0
+
+    def show_highscore(self):
+        print(f"Highscore: {self.highscore}")
+
 
 def start_game():
     game = Game()
@@ -51,9 +78,7 @@ def start_game():
 
         print(f"\nStatistik: Vinster: {player.wins}, Förluster: {player.fails}, Oavgjort: {player.draw}")
 
-        again = input("\nVill du spela en gång till? (ja/nej): ").strip().lower()
+        again = input("\nVill du spela en gång till? (ja/nej): ").lower()
         if again != 'ja':
             print("Tack för att du spelade!")
             break
-
-start_game()
