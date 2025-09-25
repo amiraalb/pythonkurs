@@ -12,7 +12,6 @@ ValueError eller syntaxfel i inmatade uttryck.
 Resultaten ska sparas i en ny fil resultat.txt.
 """
 
-
 import calculator
 
 def read_file():
@@ -20,33 +19,38 @@ def read_file():
         with open('data.txt') as file:
             file_content = file.readlines()
 
-		with open('resultat.txt', 'w') as resultat_fil:
-        	radnummer = 1
-        	for rad in file_content:
-            	tal = rad.strip()
+        with open('resultat.txt', 'w') as resultat_fil:
+            radnummer = 1
+            for rad in file_content:
+                tal = rad.strip()
 
-            	if tal == "":
-                	radnummer += 1
-                	continue
+                if tal == "":
+                    radnummer += 1
+                    continue
 
-            	delar = tal.split()
+                delar = tal.split()
+                if len(delar) != 3:
+                    resultat_fil.write(f"Rad {radnummer}: Fel format – '{tal}'\n")
+                    radnummer += 1
+                    continue
 
-            tal1_str, operator, tal2_str = delar
+                tal1_str, operator, tal2_str = delar
 
-            try:
-                tal1 = float(tal1_str)
-                tal2 = float(tal2_str)
-                resultat = calculator.calculate(tal1, tal2, operator)
-                resultat_fil.write(f"Rad {radnummer}: {tal} = {resultat}")
-            except ZeroDivisionError:
-                resultat_fil.write(f"Rad {radnummer}: Det går inte att dela med 0!")
-            except ValueError:
-                resultat_fil.write(f"Rad {radnummer}: Ogiltiga tal.")
+                try:
+                    tal1 = float(tal1_str)
+                    tal2 = float(tal2_str)
+                    resultat = calculator.calculate(tal1, tal2, operator)
+                    resultat_fil.write(f"Rad {radnummer}: {tal} = {resultat}\n")
+                except ZeroDivisionError:
+                    resultat_fil.write(f"Rad {radnummer}: Det går inte att dela med 0!\n")
+                except ValueError:
+                    resultat_fil.write(f"Rad {radnummer}: Ogiltiga tal.\n")
 
-            radnummer += 1
-		print("Resultaten har sparats i resultat.txt")
+                radnummer += 1
+
+        print("Resultaten har sparats i resultat.txt")
 
     except FileNotFoundError:
-        print("Filen hittades inte.")
+        print("Filen 'data.txt' hittades inte.")
 
 read_file()
