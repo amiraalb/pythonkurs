@@ -24,12 +24,17 @@ class Dice():
     def roll(self):
         return random.randint(1, self.sides)
 
-class Highscore():
-    def __init__(self):
-        self.highscore = 0
-
-    def show_highscore(self):
-        print(f"Highscore: {self.highscore}")
+def determine_winner(player_score, dealer_score, target=21):
+    if player_score > target:
+        return "dealer"
+    elif dealer_score > target:
+        return "player"
+    elif player_score > dealer_score:
+        return "player"
+    elif dealer_score > player_score:
+        return "dealer"
+    else:
+        return "draw"
 
 def save_results(player):
     with open('resultat.txt', 'w') as file:
@@ -69,15 +74,17 @@ def start_game():
                         dealer.score += roll
                         print(f"Tärningen visar: {roll} (Total: {dealer.score})")
 
-                    if dealer.score > game.target_score:
-                        print("Dealern gick över 21! Du vinner!")
-                        player.wins += 1
-                    elif dealer.score > player.score:
-                        print("Dealern vinner!")
-                        player.fails += 1
-                    elif dealer.score < player.score:
+                    winner = determine_winner(player.score, dealer.score, game.target_score)
+                    if winner == "player":
                         print("Du vinner!")
                         player.wins += 1
+                    elif winner == "dealer":
+                        if dealer.score > game.target_score:
+                            print("Dealern gick över 21! Du vinner!")
+                            player.wins += 1
+                        else:
+                            print("Dealern vinner!")
+                            player.fails += 1
                     else:
                         print("Det blev oavgjort!")
                         player.draw += 1
@@ -95,5 +102,5 @@ def start_game():
             save_results(player)
             break
 
-
-start_game()
+if __name__ == "__main__":
+    start_game()
