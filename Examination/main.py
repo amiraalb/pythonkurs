@@ -1,4 +1,4 @@
-from Examination.player import Player, Dealer
+from player import Player, Dealer
 from dice import Dice
 from Examination.results import save_results
 
