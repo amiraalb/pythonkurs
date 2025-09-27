@@ -1,6 +1,6 @@
 from player import Player, Dealer
 from dice import Dice
-from results import save_results
+from highscore import save_highscore
 
 
 class Game:
@@ -74,7 +74,7 @@ def start_game():
                 break
             elif again == 'nej':
                 print("Tack för att du spelade!")
-                save_results(game.player)
+                save_highscore(game.player)
                 return
             else:
                 print("Ange ett giltigt svar: 'ja' eller 'nej'.")
