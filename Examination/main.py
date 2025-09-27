@@ -1,6 +1,6 @@
 from player import Player, Dealer
 from dice import Dice
-from Examination.results import save_results
+from results import save_results
 
 
 class Game:
