@@ -1,6 +1,6 @@
-from player import Player, Dealer
+from Examination.player import Player, Dealer
 from dice import Dice
-from results import save_results
+from Examination.results import save_results
 
 
 class Game:
@@ -71,7 +71,7 @@ def start_game():
         while True:
             again = input("\nVill du spela en gång till? (ja/nej): ").lower()
             if again == 'ja':
-                break 
+                break
             elif again == 'nej':
                 print("Tack för att du spelade!")
                 save_results(game.player)
