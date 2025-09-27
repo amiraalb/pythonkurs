@@ -1,4 +1,4 @@
-from main import determine_winner
+from main import Game
 from player import Player
 
 
@@ -12,14 +12,17 @@ def test_player_reset_score():
 
 # Test 2: Testa att det blir oavgjort när både spelare och dealer har lika mycket poäng
 def test_determine_winner_draw():
-    assert determine_winner(18, 18) == "draw"
+    game = Game()
+    assert game.determine_winner(18, 18) == "draw"
 
 
 # Test 3: Testa att spelaren vinner om spelaren har högre poäng än dealern (utan att gå över 21)
 def test_determine_winner_player_wins():
-    assert determine_winner(20, 19) == "player"
+    game = Game()
+    assert game.determine_winner(20, 19) == "player"
 
 
 # Test 4: Testa att dealern vinner om dealern har högre poäng än spelaren (utan att gå över 21)
 def test_determine_winner_dealer_wins():
-    assert determine_winner(17, 20) == "dealer"
+    game = Game()
+    assert game.determine_winner(17, 20) == "dealer"
