@@ -22,7 +22,8 @@ def test_determine_winner_draw():
 
 
 # Test 3: Testa att spelaren vinner om spelaren har högre poäng än dealern (utan att gå över 21)
-# Testet startar en ny instans av objektet Game och anropar determine_winner med poängen 20 för spelare och 19 för dealern.
+# Testet startar en ny instans av objektet Game och
+# anropar determine_winner med poängen 20 för spelare och 19 för dealern.
 # Den faktiska vinnaren är "player", dvs spelaren, då 20 är högre än 19.
 def test_determine_winner_player_wins():
     game = Game()
@@ -30,7 +31,8 @@ def test_determine_winner_player_wins():
 
 
 # Test 4: Testa att dealern vinner om dealern har högre poäng än spelaren (utan att gå över 21)
-# Testet startar en ny instans av objektet Game och anropar determine_winner med poängen 17 för spelare och 20 för dealern.
+# Testet startar en ny instans av objektet Game och anropar determine_winner
+# med poängen 17 för spelare och 20 för dealern.
 # Den faktiska vinnaren är "dealer", då 20 är högre än 17.
 def test_determine_winner_dealer_wins():
     game = Game()
